@@ -13,14 +13,15 @@ parser = argparse.ArgumentParser(
     To set up internet access for a drone using an SSH reverse tunnel, follow these steps:
     
     On your local machine, establish a reverse tunnel:
-    ssh -R 8080:localhost:8080 bstg@drone
+    `ssh -R 8080:localhost:8080 bstg@drone`
     
     Then, on the drone, allow TCP forwarding and set the proxy environment variables:
+    ```
     sudo sed -i 's/#AllowTcpForwarding/AllowTcpForwarding/g' /etc/ssh/sshd_config
     sudo service ssh restart
     export http_proxy=http://localhost:8080
     export https_proxy=http://localhost:8080
-    
+    ```
     Make sure the SSH server configuration has 'GatewayPorts' enabled if needed.
     ''',
     formatter_class=argparse.RawTextHelpFormatter
